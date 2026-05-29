@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fields">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statistics">Statistics</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+    
+                <!-- Include the Profile link if the user is logged in -->
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </nav>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fields</title>
+    <style>
+         body {
+            background-image: url('/bgImage/homepage.jpg'); /* Assuming 'homepage.jpg' is your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff; /* White background color */
+            color: #2828a7; /* Dark blue text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #282ca7; /* Dark blue color for the heading */
+            margin-top: 20px; /* Add some spacing to the top of the heading */
+        }
+
+        .field-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow fields to wrap to the next row */
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .field-item {
+            margin: 10px;
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray background color */
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%; /* Adjust width as needed */
+            max-width: 300px;
+        }
+
+        .field-img {
+            width: 100%; /* Adjust image width as needed */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: cover;
+            border-radius: 5px; /* Optional: add border radius for rounded corners */
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2831a7; /* Dark blue color for field name */
+        } 
+
+        p {
+            color: #464275; /* Gray color for field description */
+        } 
+    </style>
+</head>
+<body>
+    <h1><center>Fields</center></h1>
+    <div class="field-container">
+        <% fields.forEach(field => { %>
+            <div class="field-item">
+                <!-- Make the field image clickable and link it to the field courses page -->
+                <a href="/fields/<%= field.field_id %>/courses">
+                    <img src="<%= field.image_url %>" alt="<%= field.field_name %>" class="field-img">
+                </a>
+                <a href="/fields/<%= field.field_id %>/courses"><h2><%= field.field_name %></h2> </a>
+                <a href="/fields/<%= field.field_id %>/courses"><p><%= field.field_description %></p></a>
+            </div>
+        <% }); %>
+        
+    </div>
+</body>
+</html>

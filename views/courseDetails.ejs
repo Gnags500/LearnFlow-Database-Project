@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= course.Course_ID %> - <%= course.Course_Title %> Details</title>
+    <!-- Add any necessary CSS links or stylesheets -->
+    <style>
+        body {
+            background-image: url('/bgImage/homepage3.avif');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Drop shadow effect */
+        }
+        h1, h2, h3, p {
+            color: darkblue;
+        }
+        .enroll-box {
+            background-color: blue;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .enroll-button {
+            background-color: blue;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        .enroll-button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><%= course.Course_Title %> Details</h1>
+        <p><strong>Description:</strong> <%= course.description %></p>
+        <p><strong>Offering Date:</strong> <%= course.offering_date ? course.offering_date.toDateString() : 'Not specified' %></p>
+        <p><strong>Course Point:</strong> <%= course.course_point %></p>
+        <p><strong>Field:</strong> <%= course.field %></p>
+        <p><strong>Course Fee:</strong> $<%= course.course_fee %></p>
+        <p><strong>Total Enrolled Students:</strong><%= enrollmentCount2 %></p>
+        <h3><strong>Average Rating:</strong> <%= averageRating %></h3>
+        <h3></h3>
+        <p><strong>Instructor Name:</strong> <%= course.first_name %> <%= course.last_name %></p>
+       
+        <% if (enrolled) { %>
+            <!-- Display premium content, assignments, etc. -->
+            <h3>Welcome, <%= userFirstName %>!</h3>
+            <p>You are enrolled in this course. Here's access to premium content, assignments, etc.</p>
+        <% } else { %>
+            <!-- Display enrollment option -->
+            <div class="enroll-box">
+                <form action="/enroll" method="POST">
+                    <input type="hidden" name="courseId" value="<%= course.Course_ID %>">
+                    <button class="enroll-button" type="submit">Enroll</button>
+                </form>
+            </div>
+        <% } %>
+       
+      
+       
+    </div>
+</body>
+</html>

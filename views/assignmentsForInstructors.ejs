@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments for Instructors</title>
+    <!-- Add any necessary CSS links or stylesheets -->
+    <style>
+        body {
+            background-image: url('/bgImage/insprofile.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: darkblue;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: darkblue;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <style>
+        /* Style for the description textarea */
+        #description {
+            width: 100%;
+            height: 150px; /* Adjust the height as needed */
+            padding: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical; /* Allow vertical resizing */
+        }
+    </style>
+</head>
+<body>
+    <h1>Assignments for Instructors</h1>
+   
+    <% if (assignmentsWithSubmissions.length === 0) { %>
+        <p>No assignments to evaluate.</p>
+    <% } else { %>
+        <!-- List of assignments with submissions to evaluate -->
+        <h2>Existing Assignments to Evaluate:</h2>
+        <ul>
+            <% assignmentsWithSubmissions.forEach(assignment => { %>
+                <li>
+                    <strong><%= assignment.assignment_name %></strong>
+                    <p><%= assignment.description %></p>
+                    <p><strong>Submission Date:</strong> <%= assignment.submission_date %></p>
+                    <% if (!assignment.grade) { %>
+                        <!-- Display evaluation form if the assignment is not graded -->
+                        <form action="/course/<%= courseId %>/assignment/<%= assignment.assignment_id %>/evaluate" method="POST">
+                            <label for="grade">Grade:</label>
+                            <input type="text" id="grade" name="grade">
+                            <input type="hidden" name="submissionId" value="<%= assignment.submission_id %>">
+                            <button type="submit">Evaluate</button>
+                        </form>
+                    <% } else { %>
+                        <!-- Display grade if the assignment is graded -->
+                        <p><strong>Grade:</strong> <%= assignment.grade %></p>
+                    <% } %>
+
+                    <!-- Download submitted file -->
+                    <% if (assignment.submission_file) { %>
+                        <a href="/uploads/<%= assignment.submission_file %>">Download Submitted File</a>
+
+                    <% } else { %>
+                        <p>No file submitted</p>
+                    <% } %>
+                    
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <!-- Form to add a new assignment -->
+    <h2>Add New Assignment:</h2>
+    <form action="/course/<%= courseId %>/addAssignment" method="POST">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title"><br><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br><br>
+        <button type="submit">Add Assignment</button>
+    </form>
+</body>
+</html>

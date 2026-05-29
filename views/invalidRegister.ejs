@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+         body {
+            background-image: url('/bgImage/invalid_login.gif'); /* Assuming 'invalid_login.gif' is your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .error-message {
+            color: #FF0000;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .try-again-link {
+            text-decoration: none;
+            color: #0000FF;
+            font-size: 18px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error: Email Already Taken</title>
+</head>
+<body>
+    <h1>Error: Email Already Taken</h1>
+    <p class="error-message">The email is already taken. Please try another email to register.</p>
+    <p>Please <a href="/users/register" class="try-again-link">try again</a>.</p>
+</body>
+</html>

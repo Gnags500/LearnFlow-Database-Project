@@ -1,0 +1,73 @@
+# ============================================
+# DEPENDENCIES
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ============================================
+# ENVIRONMENT VARIABLES & SECRETS
+# ============================================
+# Never commit credentials, API keys, or sensitive config
+.env
+.env.local
+.env.*.local
+.env.production.local
+.env.development.local
+
+# ============================================
+# USER UPLOADS & RUNTIME DATA
+# ============================================
+# Assignment submissions and user-uploaded files
+# These are runtime data and user content, not source code
+uploads/
+uploads/*
+!uploads/.gitkeep
+
+# ============================================
+# LOGS & TEMP FILES
+# ============================================
+logs/
+*.log
+log.txt
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# ============================================
+# IDE & EDITOR FILES
+# ============================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# ============================================
+# DEVELOPMENT & BUILD ARTIFACTS
+# ============================================
+dist/
+build/
+.cache/
+coverage/
+.nyc_output/
+
+# ============================================
+# OS FILES
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

@@ -1,0 +1,85 @@
+<body>
+    <div class="description-box">
+        <h1>Premium Course Details</h1>
+        <!-- Course details here -->
+    </div>
+
+    <div class="description-box">
+        <!-- Display Assignments -->
+        <h2>Assignments</h2>
+        <% if (user.is_instructor) { %>
+            <ul>
+                <% assignments.forEach(assignment => { %>
+                    <% if (assignment.grade === null) { %>
+                        <li>
+                            <a href="/course/<%= courseId %>/assignment/<%= assignment.id %>/grade">
+                                <%= assignment.title %>
+                            </a>
+                        </li>
+                    <% } %>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <ul>
+                <% assignment.forEach(assignment => { %>
+                    <li>
+                        <%= assignment.title %>
+                        <a href="/course/<%= courseId %>/assignment/<%= assignment.id %>/submit">Submit</a>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } %>
+    </div>
+
+    <!-- Assignment Submission Form (Hidden by default) -->
+    <div class="description-box" id="assignmentSubmissionForm" style="display: none;">
+        <h2>Submit Assignment</h2>
+        <form action="/submit-assignment" method="POST">
+            <!-- Assignment submission form fields -->
+            <button type="submit">Submit Assignment</button>
+        </form>
+    </div>
+
+    <!-- Instructor: Grade Submission Page -->
+    <div class="description-box" id="gradeSubmissionPage" style="display: none;">
+        <h2>Grade Submissions</h2>
+        <ul>
+            <% submissions.forEach(submission => { %>
+                <li>
+                    <a href="/course/<%= courseId %>/submission/<%= submission.id %>/download">
+                        <%= submission.studentName %>'s Submission
+                    </a>
+                    <form action="/course/<%= courseId %>/submission/<%= submission.id %>/grade" method="POST">
+                        <!-- Grade submission form fields -->
+                        <button type="submit">Grade</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+
+    <!-- Add Assignment Form (Hidden by default) -->
+    <div class="description-box" id="addAssignmentForm" style="display: none;">
+        <h2>Add Assignment</h2>
+        <form action="/course/<%= courseId %>/add-assignment" method="POST">
+            <!-- Assignment details form fields -->
+            <button type="submit">Add Assignment</button>
+        </form>
+    </div>
+
+    <script>
+        function showAssignmentSubmissionForm() {
+            var submissionForm = document.getElementById('assignmentSubmissionForm');
+            submissionForm.style.display = 'block';
+        }
+
+        function showGradeSubmissionPage() {
+            var gradePage = document.getElementById('gradeSubmissionPage');
+            gradePage.style.display = 'block';
+        }
+
+        function showAddAssignmentForm() {
+            var addAssignmentForm = document.getElementById('addAssignmentForm');
+            addAssignmentForm.style.display = 'block';
+        }
+    </script>

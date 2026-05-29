@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/bgImage/insprofile.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: bold;
+            color: darkblue;
+        }
+
+        .box {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .courses-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .course-item {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+        }
+
+        .course-item p {
+            margin-bottom: 0;
+        }
+
+        p.no-courses {
+            color: #ffcccc;
+        }
+
+        .course-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .field-img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1 class="text-center">Instructor Profile</h1>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="box">
+                    <h2>User Information</h2>
+                    <p>First Name: <%= user.first_name %></p>
+                    <p>Last Name: <%= user.last_name %></p>
+                    <p>Email: <%= user.email %></p>
+                    <!-- Add more user-related information here as needed -->
+
+                    <!-- Edit Information Button -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUserInfoModal">Edit Information</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="box">
+                    <h2>Profile Details</h2>
+                    <p>Instructor ID: <%= profileDetails.instructor_id %></p>
+                    <p>Joining Date: <%= profileDetails.joining_date %></p>
+                    <!-- Add more profile details here as needed -->
+                </div>
+            </div>
+        </div>
+
+        <div class="box">
+            <h2>Launched Courses</h2>
+            <% if (courses.length > 0) { %>
+            <div class="courses-container">
+                <% courses.forEach(course => { %>
+                <div class="course-item">
+                    <a href="/course/<%= course.course_id %>">
+                        <h3><%= course.course_title %></h3>
+                    </a>
+                    <!-- Add more course information here as needed -->
+                </div>
+                <% }); %>
+            </div>
+            <% } else { %>
+            <p class="no-courses">No launched courses</p>
+            <% } %>
+        </div>
+    </div>
+
+   
+    <div class="modal fade" id="editUserInfoModal" tabindex="-1" role="dialog" aria-labelledby="editUserInfoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserInfoModalLabel">Edit User Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   
+                    <form action="/profile/update" method="post">
+                       
+                        <div class="form-group">
+                            <label for="first_name">First Name</label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" value="<%= user.first_name %>"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" value="<%= user.last_name %>"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+                        </div>
+                       
+                        <input type="hidden" name="user_id" value="<%= user.user_id %>">
+
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5"> <!-- Container to center the button horizontally and add space from the top -->
+        <div class="row justify-content-center"> <!-- Row to center the button horizontally -->
+            <div class="col-md-6 text-center">
+    <!-- Add a button to launch the course creation form -->
+    <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#addCourseModal">Launch Course</button>
+     </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addCourseModal" tabindex="-1" role="dialog" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCourseModalLabel">Add New Course</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/profile/addCourse" method="post">
+                    <div class="form-group">
+                        <label for="courseID">Course ID</label>
+                        <input type="text" class="form-control" id="courseID" name="Course_ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseTitle">Course Title</label>
+                        <input type="text" class="form-control" id="courseTitle" name="Course_Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" name="Description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="coursePoint">Course Points</label>
+                        <input type="number" class="form-control" id="coursePoint" name="Course_Point" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldName">Field Name</label>
+                        <select class="form-control" id="fieldName" name="Field_Name" required>
+                            <% fieldNames.forEach(fieldName => { %>
+                                <option value="<%= fieldName.field_name %>"><%= fieldName.field_name %></option>
+                            <% }); %>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="offeringDate">Offering Date</label>
+                        <input type="date" class="form-control" id="offeringDate" name="Offering_Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseFee">Course Fee</label>
+                        <input type="number" class="form-control" id="courseFee" name="Course_Fee" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Course</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.7.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

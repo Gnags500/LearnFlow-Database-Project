@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluate Submissions</title>
+</head>
+<body>
+    <h1>Evaluate Submissions</h1>
+    <% submissions.forEach((submission, index) => { %>
+        <div>
+            <h3>Submission <%= index + 1 %></h3>
+            <p>Submitted by: <%= submission.student_name %></p>
+            <p>Submission: <%= submission.submission_text %></p>
+            <% if (submission.grade === null) { %>
+                <form action="/course/<%= courseId %>/assignment/<%= assignmentId %>/evaluate" method="POST">
+                    <input type="hidden" name="submissionId" value="<%= submission.id %>">
+                    <label for="grade">Grade:</label>
+                    <input type="text" name="grade">
+                    <button type="submit">Submit Grade</button>
+                </form>
+            <% } else { %>
+                <p>Grade: <%= submission.grade %></p>
+            <% } %>
+        </div>
+    <% }); %>
+</body>
+</html>

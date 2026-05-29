@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Premium Course Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/bgImage/insprofile.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto; /* Center the container */
+            text-align: center;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: bold;
+            color: darkblue;
+        }
+
+        .box {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .description-box {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .courses-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .course-item {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+        }
+
+        .course-item p {
+            margin-bottom: 0;
+        }
+
+        p.no-courses {
+            color: #ffcccc;
+        }
+
+        .course-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .field-img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .add-chapter-form {
+            display: none; /* Hide the form by default */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="description-box">
+            <h1>Premium Course Details</h1>
+            <h2>Course Details</h2>
+            <p>Title: <%= course.course_title %></p>
+            <p>Description: <%= course.description %></p>
+            <p>Instructor: <%= course.first_name %> <%= course.last_name %></p>
+            <p>Rating: <%= (course.average_rating)%> </p>
+        </div>
+
+        <div class="description-box">
+            <% if (chapters.length > 0) { %>
+                <h2>Chapters</h2>
+                <ul>
+                    <% chapters.forEach(chapter => { %>
+                        <li><a href="/course/<%= courseId %>/chapter/<%= chapter.chapter_id %>"><%= chapter.chapter_title %></a></li>
+                    <% }); %>
+                </ul>
+            <% } else { %>
+                <p>No chapters available.</p>
+            <% } %>
+        </div>
+        <div class="description-box">
+            <!-- Display Assignments -->
+            <h2>Assignments</h2>
+            <a href="/course/<%= courseId %>/assignments">View Assignments</a>
+        </div>
+
+        <div class="description-box">
+            <!-- Add a button to navigate to top-rated students -->
+            <h2>Top Students By Performance</h2>
+            <button onclick="window.location.href='/course/<%= courseId %>/getTopRatedStudentInCourse'">View Top Students By Performance</button>
+        </div>
+
+        <div class="description-box">
+            <% if (user.is_student) { %>
+            <!-- Display a button to show the rating form -->
+            <h2>Rate this Course</h2>
+            <button id="showRatingForm" onclick="showRatingForm()">Rate this Course</button>
+            
+            <!-- Rating form -->
+            <div id="ratingForm" style="display: none;">
+                <form action="/submit-rating" method="POST">
+                    <input type="hidden" name="courseId" value="<%= course.course_id %>">
+                    <label for="rating">Your Rating:</label>
+                    <select name="rating" id="rating">
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Fair</option>
+                        <option value="3">3 - Average</option>
+                        <option value="4">4 - Good</option>
+                        <option value="5">5 - Excellent</option>
+                    </select>
+                    <button type="submit">Submit Rating</button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+
+        <div class="description-box">
+            <% if (user.is_instructor) { %>
+                <h2>Add Chapter</h2>
+                <form action="/course/<%= courseId %>/addChapter" method="post">
+                    <label for="chapterTitle">Chapter Title:</label>
+                    <input type="text" id="chapterTitle" name="chapterTitle" required>
+                    <br>
+                    <label for="chapterDescription">Chapter Description:</label>
+                    <input type="text" id="chapterDescription" name="chapterDescription" required>
+                    <br>
+                    <button type="submit">Add Chapter</button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+
+    <script>
+        function showRatingForm() {
+            var ratingForm = document.getElementById('ratingForm');
+            ratingForm.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

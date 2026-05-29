@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Rated Instructors</title>
+    <!-- Add any necessary CSS links or stylesheets -->
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <style>
+        body {
+          /* background-image: url('/bgImage/homepage3.avif'); /* Assuming 'homepage.jpg' is your background image */
+          background-image: url('/bgImage/homepage.avif'); 
+           background-size: cover;
+           background-position: center;
+           background-repeat: no-repeat;
+           height: 100vh;
+           margin: 0;
+           padding: 0;
+       }
+       body {
+           background-color: white;
+           color: darkblue;
+           font-family: Arial, sans-serif;
+           padding: 20px;
+       }
+
+       .courses-container {
+           margin-top: 20px;
+           display: grid;
+           grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+           grid-gap: 20px;
+       }
+
+       .course-item {
+           background-color: #f0faff; /* Light blue background color */
+           padding: 20px;
+           border-radius: 5px;
+           box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+       }
+
+       .course-item h3 {
+           margin-top: 0;
+       }
+
+       .course-item p {
+           margin-bottom: 0;
+       }
+
+       h1, h2, h3, p {
+           color: darkblue;
+       }
+
+       p.no-courses {
+           color: #ffcccc; /* Light red color for no courses message */
+       }
+
+       .course-img {
+           max-width: 100%;
+           height: auto;
+           border-radius: 5px;
+           margin-bottom: 10px;
+       }
+
+       .field-img {
+           max-width: 300px; /* Control the width of the field image */
+           height: auto;
+           border-radius: 5px;
+           margin-bottom: 10px;
+       }
+       table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: 2px solid #ddd; /* Add border around the table */
+}
+
+th, td {
+    padding: 12px; /* Increase padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: bold; /* Make table headers bold */
+}
+
+td {
+    background-color: #fff; /* Set background color for table cells */
+    color: #333; /* Set text color for table cells */
+}
+   </style>
+</head>
+<body>
+    <h1>Top Rated Instructors</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Instructor ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Average Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% topRatedInstructors.forEach(instructor => { %>
+                <tr>
+                    <td><%= instructor.instructor_id %></td>
+                    <td><%= instructor.first_name %></td>
+                    <td><%= instructor.last_name %></td>
+                    <td><%= instructor.average_rating %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>

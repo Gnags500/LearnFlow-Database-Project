@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Top Rated Students</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/bgImage/homepage.avif'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: bold;
+            color: darkblue;
+        }
+
+        .box {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .courses-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .course-item {
+            background-color: #f0faff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .description-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+        }
+
+        .course-item p {
+            margin-bottom: 0;
+        }
+
+        p.no-courses {
+            color: #ffcccc;
+        }
+
+        .course-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .field-img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="description-box">
+        <h1>Top Performing Students In The Course</h1>
+    </div>
+
+    <div class="description-box">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><h3>Student ID</h3></th>
+                        <th><h3>Student Name</h3></th>
+                        <th><h3>Total Grade</h3></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% topRatedStudents.forEach(student => { %>
+                        <tr>
+                            <td><%= student.student_id %></td>
+                            <td><%= student.full_name %></td>
+                            <td><%= student.total_grade %></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

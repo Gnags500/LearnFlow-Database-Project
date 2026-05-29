@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Apply styles to the entire page */
+        body {
+            background-image: url('/bgImage/insprofile.png'); /* Assuming 'homepage.jpg' is your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for the login container */
+        .login-container {
+    font-family: Arial, sans-serif;
+    background-color: white; /* White background color */
+    color: darkblue; /* Dark blue text color */
+    margin: 20px auto; /* Add margin to the top */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 480px; /* Adjusted width */
+    text-align: center;
+}
+
+        /* Style for the form elements */
+        form {
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 3px;
+            font-size: 16px;
+            background-color: white; /* White background color for input fields */
+            color: darkblue; /* Dark blue text color */
+        }
+
+        input[type="submit"] {
+            background-color: white; /* White button background color */
+            color: darkblue; /* Dark blue button text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e6e6e6; /* Light gray button hover background color */
+        }
+
+        /* Add styling for the "Register" link */
+        .register-link {
+            font-size: 14px;
+            color: white; /* White link color */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/fields">Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/statistics">Statistics</a>
+                    </li>
+                    <!-- Add more navigation links as needed -->
+        
+                    <!-- Include the Profile link if the user is logged in -->
+                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Profile</a>
+                    </li>
+                
+                </ul>
+            </div>
+        </nav>
+        
+    </header>
+    
+    <div class="login-container">
+        <h1>Login</h1>
+        <ul>
+            <% if (typeof errors != 'undefined') { %> <% errors.forEach(error => { %>
+            <li><%= error.message %></li>
+            <% }) %> <% } %>
+        </ul>
+
+        <form action="/users/login" method="POST">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+
+        <p>Don't have an account? <a class="register-link" href="/users/register">Register here</a></p>
+    </div>
+</body>
+
+</html>

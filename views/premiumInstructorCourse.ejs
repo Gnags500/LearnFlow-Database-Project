@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Premium page </title>
+</head>
+<body>
+    <h1>  Welcome, <%= user.First_Name %> <%= user.Last_Name %></h1>
+    <h2>Chapters</h2>
+    <% for(let chapter of chapters) { %>
+        <a href="/course/<%= courseId %>/chapter/<%= chapter.chapter_id %>">
+            <%= chapter.chapter_title %>
+        </a>
+        <br>
+    <% } %>
+    <% if (user.is_instructor) { %>
+        <form action="/course/<%= courseId %>/addChapter" method="post">
+            <label for="chapterTitle">Chapter Title:</label>
+            <input type="text" id="chapterTitle" name="chapterTitle">
+            <br>
+            <label for="chapterDescription">Chapter Description:</label>
+            <input type="text" id="chapterDescription" name="chapterDescription">
+            <br>
+            <button type="submit">Add Chapter</button>
+        </form>
+    <% } %>
+</body>
+</html>

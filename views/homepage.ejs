@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/bgImage/homepage.png'); /* Assuming 'homepage.jpg' is your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white; /* Set text color to white */
+            height: 100%;
+            padding-top: 50px; /* Adjust top padding if needed */
+        }
+
+        .text-box {
+            background-color: darkblue; /* Set background color to dark blue */
+            padding: 20px; /* Add some padding for better appearance */
+            border-radius: 10px; /* Add border-radius for rounded corners */
+        }
+
+        .navbar {
+            margin-bottom: 0; /* Remove default margin */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fields">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/statistics">Statistics</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+    
+                <!-- Include the Profile link if the user is logged in -->
+               
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            
+            </ul>
+        </div>
+    </nav>
+    
+</header>
+
+<div class="container">
+    <div class="text-box">
+        <h1>Welcome to our E-learning Platform</h1>
+        <!-- Add content for the homepage -->
+
+        <!-- Add search bar -->
+        <form action="/search" method="GET">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="q" placeholder="Enter search term">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="mt-4 text-center">
+    <!-- Add footer content -->
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

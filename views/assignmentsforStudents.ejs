@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments for Students</title>
+    <!-- Add any necessary CSS links or stylesheets -->
+    <style>
+        body {
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: darkblue;
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+        }
+
+        strong {
+            color: darkblue;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Assignments for Students</h1>
+   
+    <% if (assignments.length === 0) { %>
+        <p>No assignments to submit.</p>
+    <% } else { %>
+        <!-- List of assignments for students -->
+        <h2>Assignments to Submit:</h2>
+        <ul>
+            <% assignments.forEach((assignment, index) => { %>
+                <li>
+                    <strong>Assignment No <%= index + 1 %></strong>
+                    <p><strong>Title:</strong> <%= assignment.assignment_name %></p>
+                    <p><strong>Description:</strong> <%= assignment.description %></p>
+                    
+                    <!-- Form to submit assignment -->
+                    <form action="/course/<%= courseId %>/assignment/<%= assignment.assignment_id %>/submit" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="assignmentId" value="<%= assignment.assignment_id %>">
+                        <label for="submissionFile">Upload PDF:</label>
+                        <input type="file" id="submissionFile" name="submissionFile" accept=".pdf">
+                        <button type="submit">Submit Assignment</button>
+                    </form>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <% if (gradedAssignments.length === 0) { %>
+        <p>No graded assignments available.</p>
+    <% } else { %>
+        <!-- Section for graded assignments -->
+        <h2>Graded Assignments:</h2>
+        <ul>
+            <% gradedAssignments.forEach((assignment, index) => { %>
+                <li>
+                    <strong>Assignment No <%= index + 1 %></strong>
+                    <p><strong>Title:</strong> <%= assignment.assignment_name %></p>
+                    <p><strong>Grade:</strong> <%= assignment.grade %></p>
+                </li>
+            <% }); %>
+        </ul>
+    <% } %>
+</body>
+</html>

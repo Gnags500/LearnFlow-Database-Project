@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fields">Fields</a>
+                </li>
+                <!-- Add more navigation links as needed -->
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            
+            </ul>
+        </div>
+    </nav>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+         body {
+            background-image: url('/bgImage/homepage3.avif'); /* Assuming 'homepage.jpg' is your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: white;
+            color: darkblue;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .courses-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .course-item {
+            background-color: #f0faff; /* Light blue background color */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item h3 {
+            margin-top: 0;
+        }
+
+        .course-item p {
+            margin-bottom: 0;
+        }
+
+        h1, h2, h3, p {
+            color: darkblue;
+        }
+
+        p.no-courses {
+            color: #ffcccc; /* Light red color for no courses message */
+        }
+
+        .course-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .field-img {
+            max-width: 300px; /* Control the width of the field image */
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Results</h1>
+    <div class="courses-container">
+        <% courses.forEach(course => { %>
+            <div class="course-item">
+                <h3><a href="/course/<%= course.course_id %>"><%= course.course_title %></a></h3>
+                
+                <p><%= course.description %></p>
+                <p><%= course.average_rating %></p>
+            </div>
+        <% }); %>
+    </div>
+    <% if (courses.length === 0) { %>
+        <p class="no-courses">No courses found.</p>
+    <% } %>
+</body>
+</html>
