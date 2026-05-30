@@ -31,16 +31,14 @@ BEGIN
     
     BEGIN
         
-        User_ID := generate_user_id();
-        INSERT INTO Users (User_id, First_Name, Last_Name, Date_of_Birth, Email, Pass, Is_Student, Is_Instructor, Bank_Account)
-        VALUES (User_ID, First_Name, Last_Name, Date_of_Birth, Email, Pass, 
+        user_id := generate_user_id()::INT;
+        INSERT INTO Users (User_id, First_Name, Last_Name, Date_of_Birth, Email, Pass, Is_Student, Is_Instructor)
+        VALUES (user_id::VARCHAR, First_Name, Last_Name, Date_of_Birth, Email, Pass, 
                 CASE WHEN User_Type = 'student' THEN TRUE ELSE FALSE END,
-                CASE WHEN User_Type = 'instructor' THEN TRUE ELSE FALSE END,
-                Bank_Account);
+                CASE WHEN User_Type = 'instructor' THEN TRUE ELSE FALSE END);
    
         COMMIT;
     EXCEPTION
- 
         WHEN others THEN
             ROLLBACK;
             RAISE;

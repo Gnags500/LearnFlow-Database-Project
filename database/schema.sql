@@ -10,11 +10,20 @@ CREATE TABLE Course (
     Field_ID VARCHAR(10)
 );
 
--- create table Field (
--- 	Field_ID VARCHAR(10),
--- 	Field_Name VARCHAR(30)
--- 	
--- );
+CREATE TABLE FIELD (
+    Field_ID VARCHAR(10) PRIMARY KEY,
+    Field_Name VARCHAR(50) NOT NULL,
+    Field_Description TEXT,
+    image_url VARCHAR(255)
+);
+
+CREATE TABLE ATTEND (
+    Student_ID VARCHAR(10) NOT NULL,
+    Exam_ID VARCHAR(10) NOT NULL,
+    Exam_Date DATE NOT NULL,
+    Obtained_Marks DECIMAL(10, 2),
+    PRIMARY KEY (Student_ID, Exam_ID)
+);
 
 CREATE TABLE Users (
     User_ID VARCHAR(10) PRIMARY KEY,
@@ -31,31 +40,6 @@ CREATE TABLE Users (
     )
 );
 
-
-
--- CREATE TABLE FIELD (
---     Field_ID VARCHAR(10) PRIMARY KEY,
---     Field_Name VARCHAR(50) NOT NULL,
---     Field_Description TEXT
--- );
--- 
-CREATE TABLE FIELD (
-    Field_ID VARCHAR(10) PRIMARY KEY,
-    Field_Name VARCHAR(50) NOT NULL,
-    Field_Description TEXT,
-    image_url VARCHAR(255) -- Add this column for storing image URLs
-);
-
-
-CREATE TABLE ATTEND (
-    Student_ID VARCHAR(10) NOT NULL,
-    Exam_ID VARCHAR(10) NOT NULL,
-    Exam_Date DATE NOT NULL,
-    Obtained_Marks DECIMAL(10, 2),
-    PRIMARY KEY (Student_ID, Exam_ID)
-);
-
-
 CREATE TABLE Student (
     Student_ID VARCHAR(10) PRIMARY KEY,
     Profile_Points DECIMAL(10, 2)
@@ -66,23 +50,22 @@ CREATE TABLE Instructor (
     Joining_Date DATE,
     Bank_Account VARCHAR(50)
 );
-alter table instructor  
-add column User_ID VARCHAR(10);
 
-alter table instructor
-add constraint fk_User_ID
-foreign key (User_ID) references Users(User_ID);
+ALTER TABLE instructor  
+ADD COLUMN User_ID VARCHAR(10);
+
+ALTER TABLE instructor
+ADD CONSTRAINT fk_User_ID
+FOREIGN KEY (User_ID) REFERENCES Users(User_ID);
 
 CREATE TABLE Assignment (
     Assignment_ID SERIAL PRIMARY KEY,
     Course_ID VARCHAR(10),
     Assignment_Name VARCHAR(100),
     Deadline TIMESTAMP,
-    Description  TEXT,
+    Description TEXT,
     FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID)
 );
-
-
 
 CREATE TABLE Assignment_Submission (
     Submission_ID SERIAL PRIMARY KEY,
@@ -113,7 +96,6 @@ CREATE TABLE Payment (
     FOREIGN KEY (Course_ID) REFERENCES Course(Course_ID)
 );
 
-
 CREATE TABLE Enroll (
     Student_ID VARCHAR(10),
     Course_ID VARCHAR(10),
@@ -141,8 +123,6 @@ CREATE TABLE Course_Ratings (
     FOREIGN KEY (User_ID) REFERENCES Users(User_ID)
 );
 
-
-
 ALTER TABLE ATTEND
 ADD CONSTRAINT fk_attend_student
 FOREIGN KEY (Student_ID) REFERENCES Student(Student_ID);
@@ -155,12 +135,12 @@ ALTER TABLE Feedback_Of_Student
 ADD CONSTRAINT fk_feedback_course
 FOREIGN KEY (Feedback_ID) REFERENCES Feedback(Feedback_ID);
 
-alter table student 
-add column User_ID VARCHAR(10);
+ALTER TABLE student 
+ADD COLUMN User_ID VARCHAR(10);
 
-alter table student 
-add constraint fk_User_ID
-foreign key (User_ID) references Users(User_ID);
+ALTER TABLE student 
+ADD CONSTRAINT fk_User_ID
+FOREIGN KEY (User_ID) REFERENCES Users(User_ID);
 
 ALTER TABLE Assignment
 ADD COLUMN Course_ID VARCHAR(10);
@@ -173,11 +153,9 @@ ALTER TABLE Course_Materials
 ADD COLUMN Chapter_ID VARCHAR(10) REFERENCES Course_Chapters(Chapter_ID);
 
 ALTER TABLE Course_Materials
-ADD COLUMN material_type VARCHAR(10) ;
+ADD COLUMN material_type VARCHAR(10);
 
 ALTER TABLE Student ALTER COLUMN Student_ID TYPE VARCHAR(20);
 
 ALTER TABLE Course_Ratings
-ALTER COLUMN Rating_ID TYPE VARCHAR(20); 
-
-
+ALTER COLUMN Rating_ID TYPE VARCHAR(20);
